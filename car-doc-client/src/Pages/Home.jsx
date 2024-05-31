@@ -1,9 +1,12 @@
+import HomeBanner from "../Components/Shared/HomePageComponents/HomeBanner";
 
 const Home = () => {
 
     return (
-        <div className="text-5xl">
-            Home
+        <div className="">
+            <div className="">
+                <HomeBanner></HomeBanner>
+            </div>
         </div>
     );
 };
