@@ -27,7 +27,9 @@ const Navbar = () => {
                             <button className="mt-2 btn btn-sm btn-outline w-20 text-xs text-white">Search</button>
                         </ul>
                     </div>
-                    <Link><img className="w-8 md:w-16" src="/logo.svg" alt="company-logo" /></Link>
+                    <div className="bg-gray-300 p-1 rounded-lg"> 
+                        <Link><img className="w-8 md:w-16" src="/logo.svg" alt="company-logo" /></Link>
+                    </div>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
@@ -35,8 +37,8 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link to={'/'} className="btn btn-ghost text-lg"><RiShoppingBagLine/></Link>
-                    <button className="hidden lg:inline-flex btn btn-ghost text-lg text-white"><CiSearch/></button>
+                    <Link to={'/'} className="btn btn-ghost text-lg"><RiShoppingBagLine /></Link>
+                    <button className="hidden lg:inline-flex btn btn-ghost text-lg text-white"><CiSearch /></button>
                     <Link to={'/'} className="btn btn-outline btn-accent">Appointment</Link>
                 </div>
             </div>

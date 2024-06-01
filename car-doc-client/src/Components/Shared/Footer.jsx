@@ -5,7 +5,9 @@ const Footer = () => {
         <div className="pt-12">
             <footer className="footer p-10 bg-base-200 text-base-content">
                 <aside>
-                <Link><img className="w-8 md:w-16" src="/logo.svg" alt="company-logo" /></Link>
+                <div className="bg-gray-300 p-2 rounded-lg"> 
+                        <Link><img className="w-8 md:w-16" src="/logo.svg" alt="company-logo" /></Link>
+                    </div>
                     <p>Car Service<br />Providing reliable services since 2002</p>
                 </aside>
                 <nav>

@@ -1,6 +1,6 @@
-import HomeAbout from "../Components/Shared/HomePageComponents/HomeAbout";
-import HomeBanner from "../Components/Shared/HomePageComponents/HomeBanner";
-import ServicesComponent from "../Components/Shared/HomePageComponents/ServicesComponent";
+import HomeAbout from "../Components/HomePageComponents/HomeAbout";
+import HomeBanner from "../Components/HomePageComponents/HomeBanner";
+import ServicesComponent from "../Components/HomePageComponents/ServicesComponent";
 
 const Home = () => {
 
