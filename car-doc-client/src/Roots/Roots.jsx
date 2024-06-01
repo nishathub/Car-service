@@ -8,10 +8,12 @@ const Roots = () => {
             <div className="">
                 <Navbar></Navbar>
             </div>
-            <div className="pt-0">
+            <div className="">
                 <Outlet></Outlet>
             </div>
-            <Footer></Footer>
+            <div>
+                <Footer></Footer>
+            </div>
         </div>
     );
 };

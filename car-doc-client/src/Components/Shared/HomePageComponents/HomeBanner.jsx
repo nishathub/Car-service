@@ -22,21 +22,21 @@ const HomeBanner = () => {
             {/* Carousel Items  */}
             <div className="carousel w-full h-96 md:h-[500px]">
                 <div id="slide1" className="carousel-item relative w-full h-full">
-                    <img src={image1} className="w-full h-full object-cover" />
+                    <img src={image1} className="w-full h-full object-cover object-top" />
                     <div className="absolute flex justify-between md:justify-end gap-4 transform -translate-y-1/2 left-5 right-5 top-1/2 md:top-3/4 z-20">
                         <a href="#slide4" className="btn btn-circle">❮</a>
                         <a href="#slide2" className="btn btn-circle btn-error">❯</a>
                     </div>
                 </div>
                 <div id="slide2" className="carousel-item relative w-full h-full">
-                    <img src={image2} className="w-full h-full object-cover" />
+                    <img src={image2} className="w-full h-full object-cover object-top" />
                     <div className="absolute flex justify-between md:justify-end gap-4 transform -translate-y-1/2 left-5 right-5 top-1/2 md:top-3/4 z-20">
                         <a href="#slide1" className="btn btn-circle">❮</a>
                         <a href="#slide3" className="btn btn-circle btn-error">❯</a>
                     </div>
                 </div>
                 <div id="slide3" className="carousel-item relative w-full h-full">
-                    <img src={image3} className="w-full h-full object-cover" />
+                    <img src={image3} className="w-full h-full object-cover object-top" />
                     <div className="absolute flex justify-between md:justify-end gap-4 transform -translate-y-1/2 left-5 right-5 top-1/2 md:top-3/4 z-20">
                         <a href="#slide2" className="btn btn-circle">❮</a>
                         <a href="#slide4" className="btn btn-circle btn-error">❯</a>
