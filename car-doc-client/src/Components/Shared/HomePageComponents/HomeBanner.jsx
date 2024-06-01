@@ -15,7 +15,7 @@ const HomeBanner = () => {
                 <h2 className="text-xl md:text-5xl font-bold  md:max-w-72">Affordable price for car servicing</h2>
                 <p className="mt-2 md:mt-6 max-w-xs md:max-w-lg">There are many variations of passages of  available, but the majority have suffered alteration in some form</p>
                 <div className="mt-4 space-x-4 hidden md:inline-block">
-                    <button className="btn btn-error">Discover More</button>
+                    <button className="btn btn-error font-bold">Discover More</button>
                     <button className="btn btn-outline btn-accent">Latest Project</button>
                 </div>
             </div>

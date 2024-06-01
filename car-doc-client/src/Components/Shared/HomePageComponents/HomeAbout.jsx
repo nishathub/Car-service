@@ -12,8 +12,8 @@ const HomeAbout = () => {
 {/* 
                 <img className="h-full w-full lg:hidden object-cover rounded-xl" src="https://i.ibb.co/vwmhPtf/person.jpg" alt="parts-photo" /> */}
 
-                    <div className="absolute bottom-4 lg:bottom-0 right-4 lg:right-16 w-32 lg:w-[220px] lg:h-[200px]">
-                        <img className="h-full w-full object-cover rounded-xl" src="https://i.ibb.co/HC625JS/parts.jpg" alt="parts-photo" />
+                    <div className="absolute bottom-4 lg:bottom-0 right-4 lg:right-16 w-32 lg:w-[220px] lg:h-[200px] border-4 lg:border-8 border-gray-400 rounded-lg ">
+                        <img className="h-full w-full object-cover " src="https://i.ibb.co/HC625JS/parts.jpg" alt="parts-photo" />
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@ const HomeAbout = () => {
                     <h4 className="lg:max-w-60 text-lg md:text-3xl font-bold">We are qualified & of experience in this field</h4>
                     <p className="text-sm capitalize lg:max-w-96 tracking-wide">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
                     <p className="text-sm capitalize lg:max-w-96 tracking-wide">the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.  </p>
-                    <Link><button className="btn btn-error btn-sm md:btn-md ">Get More Info</button></Link>
+                    <Link><button className="btn btn-error btn-sm md:btn-md font-bold">Get More Info</button></Link>
 
                 </div>
             </div>
