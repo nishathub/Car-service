@@ -24,6 +24,7 @@ const Navbar = () => {
                         </div>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                             {links}
+                            <button className="mt-2 btn btn-sm btn-outline w-20 text-xs text-white">Search</button>
                         </ul>
                     </div>
                     <Link><img className="w-8 md:w-16" src="/logo.svg" alt="company-logo" /></Link>
@@ -35,7 +36,7 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-end">
                     <Link to={'/'} className="btn btn-ghost text-lg"><RiShoppingBagLine/></Link>
-                    <button className="btn btn-ghost text-lg text-white"><CiSearch/></button>
+                    <button className="hidden lg:inline-flex btn btn-ghost text-lg text-white"><CiSearch/></button>
                     <Link to={'/'} className="btn btn-outline btn-accent">Appointment</Link>
                 </div>
             </div>

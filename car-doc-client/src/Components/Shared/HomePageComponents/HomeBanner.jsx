@@ -11,12 +11,12 @@ const HomeBanner = () => {
             {/* The Overlay of black gradient  */}
             <div className="absolute left-0 top-0 w-full h-full bg-gradient-to-r from-black via-black/50 to-transparent z-10"></div>
             {/* The banner text  */}
-            <div className="absolute left-10 top-1/3 text-gray-100 z-20">
-                <h2 className="text-5xl font-bold  md:max-w-72">Affordable price for car servicing</h2>
-                <p className="mt-6 md:max-w-lg">There are many variations of passages of  available, but the majority have suffered alteration in some form</p>
+            <div className="absolute left-10 top-[60%] md:top-1/3 text-gray-100 z-20">
+                <h2 className="text-xl md:text-5xl font-bold  md:max-w-72">Affordable price for car servicing</h2>
+                <p className="mt-2 md:mt-6 max-w-xs md:max-w-lg">There are many variations of passages of  available, but the majority have suffered alteration in some form</p>
             </div>
             {/* Carousel Items  */}
-            <div className="carousel w-full h-[500px]">
+            <div className="carousel w-full h-96 md:h-[500px]">
                 <div id="slide1" className="carousel-item relative w-full h-full">
                     <img src={image1} className="w-full h-full object-cover" />
                     <div className="absolute flex justify-between md:justify-end gap-4 transform -translate-y-1/2 left-5 right-5 top-1/2 md:top-3/4 z-20">
