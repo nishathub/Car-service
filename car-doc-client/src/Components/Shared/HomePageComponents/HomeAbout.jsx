@@ -2,26 +2,28 @@ import { Link } from "react-router-dom";
 
 const HomeAbout = () => {
     return (
-        <div className="grid md:grid-cols-7">
+        <div className="grid grid-cols-1 lg:grid-cols-7 gap-8">
             {/* here, we set bg in one div and add an absolute div inside of it to get targeted style  */}
-            <div className="relative md:col-span-3">
-                <div className="bg-[url('https://i.ibb.co/vwmhPtf/person.jpg')] md:w-[350px] md:h-[320px] bg-cover rounded-lg">
+            <div className="relative col-span-1 lg:col-span-3">
+            <h2 className="lg:hidden text-error text-lg mb-4">About Us</h2>
+
+                <div className="bg-[url('https://i.ibb.co/vwmhPtf/person.jpg')] w-full h-60 lg:w-[350px] lg:h-[320px] bg-cover rounded-lg">
                     {/* We can also remove bg and add img element to get similar style  */}
+{/* 
+                <img className="h-full w-full lg:hidden object-cover rounded-xl" src="https://i.ibb.co/vwmhPtf/person.jpg" alt="parts-photo" /> */}
 
-                {/* <img className="h-full w-full object-cover rounded-xl" src="https://i.ibb.co/vwmhPtf/person.jpg" alt="parts-photo" /> */}
-
-                    <div className="absolute bottom-0 right-16 md:w-[220px] md:h-[200px]">
+                    <div className="absolute bottom-4 lg:bottom-0 right-4 lg:right-16 w-32 lg:w-[220px] lg:h-[200px]">
                         <img className="h-full w-full object-cover rounded-xl" src="https://i.ibb.co/HC625JS/parts.jpg" alt="parts-photo" />
                     </div>
                 </div>
             </div>
-            <div className="md:col-span-4">
-                <h2 className="text-error text-lg mb-4">About Us</h2>
+            <div className="lg:col-span-4 col-span-1 px-4 lg:px-0">
+                <h2 className=" hidden lg:inline-block text-error text-lg mb-4">About Us</h2>
                 <div className="flex flex-col gap-4">
-                    <h4 className="md:max-w-60 md:text-3xl">We are qualified & of experience in this field</h4>
-                    <p className="text-sm capitalize md:max-w-96 tracking-wide">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
-                    <p className="text-sm capitalize md:max-w-96 tracking-wide">the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.  </p>
-                    <Link><button className="btn btn-error ">Get More Info</button></Link>
+                    <h4 className="lg:max-w-60 text-lg md:text-3xl font-bold">We are qualified & of experience in this field</h4>
+                    <p className="text-sm capitalize lg:max-w-96 tracking-wide">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
+                    <p className="text-sm capitalize lg:max-w-96 tracking-wide">the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.  </p>
+                    <Link><button className="btn btn-error btn-sm md:btn-md ">Get More Info</button></Link>
 
                 </div>
             </div>
