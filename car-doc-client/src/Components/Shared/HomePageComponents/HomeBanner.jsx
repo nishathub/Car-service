@@ -14,6 +14,10 @@ const HomeBanner = () => {
             <div className="absolute left-10 top-[60%] md:top-1/3 text-gray-100 z-20">
                 <h2 className="text-xl md:text-5xl font-bold  md:max-w-72">Affordable price for car servicing</h2>
                 <p className="mt-2 md:mt-6 max-w-xs md:max-w-lg">There are many variations of passages of  available, but the majority have suffered alteration in some form</p>
+                <div className="mt-4 space-x-4 hidden md:inline-block">
+                    <button className="btn btn-error">Discover More</button>
+                    <button className="btn btn-outline btn-accent">Latest Project</button>
+                </div>
             </div>
             {/* Carousel Items  */}
             <div className="carousel w-full h-96 md:h-[500px]">
