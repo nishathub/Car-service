@@ -1,8 +1,11 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { carDoctorContext } from "../AuthProvider/carDoctorContext";
 
 const Login = () => {
 
     const loginImage = '../../public/images/login/login.svg';
+    const { loginUser } = useContext(carDoctorContext);
 
     const handleLogin = e => {
         e.preventDefault();
@@ -10,7 +13,12 @@ const Login = () => {
         const form = e.target;
         const logEmail = form.email.value;
         const logPassword = form.password.value;
-        console.log(logEmail, logPassword);
+        // login
+        loginUser(logEmail, logPassword)
+            .then(result => {
+                console.log(result.user);
+            })
+            .catch(error => console.error(error))
     }
     return (
         <div className="pt-32 grid grid-cols-1 md:grid-cols-2 justify-center gap-8 items-center">

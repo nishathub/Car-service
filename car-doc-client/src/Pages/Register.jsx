@@ -1,16 +1,30 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { carDoctorContext } from "../AuthProvider/carDoctorContext";
 
 const Register = () => {
 
     const loginImage = '../../public/images/login/login.svg';
+    const { createNewUser, updateUserProfile } = useContext(carDoctorContext);
 
-    const handleLogin = e => {
+    const handleRegister = e => {
         e.preventDefault();
 
         const form = e.target;
+        const logName = form.name.value;
         const logEmail = form.email.value;
         const logPassword = form.password.value;
-        console.log(logEmail, logPassword);
+
+        // sign in 
+        createNewUser(logEmail, logPassword)
+            .then(result => {
+                console.log(result.user)
+                // update
+                updateUserProfile(logName)
+                    .then(() => console.log('name updated'))
+                    .catch(error => console.error(error))
+            })
+            .catch(error => console.error(error.message))
     }
     return (
         <div className="pt-32 grid grid-cols-1 md:grid-cols-2 justify-center gap-8 items-center">
@@ -19,7 +33,7 @@ const Register = () => {
             </div>
             <div className="w-10/12 mx-auto md:max-w-sm border border-gray-500 p-8 space-y-4">
                 <h2 className="md:text-3xl text-accent text-center mb-8">Register</h2>
-                <form onSubmit={handleLogin} className="space-y-4">
+                <form onSubmit={handleRegister} className="space-y-4">
                     <div>
                         <label className="label font-bold">Name</label>
                         <input className="input input-bordered w-full" type="text" name="name" placeholder="Your name" />

@@ -1,4 +1,5 @@
 import ContactCard from "../Components/HomePageComponents/ContactCard";
+import FeaturesSection from "../Components/HomePageComponents/FeaturesSection";
 import HomeAbout from "../Components/HomePageComponents/HomeAbout";
 import HomeBanner from "../Components/HomePageComponents/HomeBanner";
 import ServicesComponent from "../Components/HomePageComponents/ServicesComponent";
@@ -18,6 +19,9 @@ const Home = () => {
             </div>
             <div className="py-4 lg:py-12">
                 <ContactCard></ContactCard>
+            </div>
+            <div className="py-4 lg:py-12">
+                <FeaturesSection></FeaturesSection>
             </div>
         </div>
     );

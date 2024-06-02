@@ -1,10 +1,23 @@
 import { Link } from "react-router-dom";
 import { RiShoppingBagLine } from "react-icons/ri";
 import { CiSearch } from "react-icons/ci";
+import { useContext } from "react";
+import { carDoctorContext } from "../../AuthProvider/carDoctorContext";
+import { FaUser } from "react-icons/fa";
+
 
 
 
 const Navbar = () => {
+    const { user, isLoading, logoutUser } = useContext(carDoctorContext);
+    console.log(user, isLoading);
+
+    const handleLogout = () => {
+        logoutUser()
+            .then(() => console.log('user logged out'))
+            .catch(error => console.error(error))
+    }
+
     const links =
         <>
             <li><Link to={'/'}>Home</Link></li>
@@ -13,7 +26,19 @@ const Navbar = () => {
             <li><Link to={'/'}>Blog</Link></li>
             <li><Link to={'/'}>Contact</Link></li>
 
+        </>;
+    const userDropdown =
+        <>
+            <div className="dropdown dropdown-end">
+                <div tabIndex={0} role="button" className="btn btn-ghost ">
+                    <p><FaUser /></p>
+                </div>
+                <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-300 rounded-box w-52">
+                    <li onClick={handleLogout} className="text-error font-bold"><a>Logout</a></li>
+                </ul>
+            </div>
         </>
+
     return (
         <div className="fixed w-full z-50">
             <div className="navbar bg-base-200 max-w-6xl">
@@ -27,7 +52,7 @@ const Navbar = () => {
                             <button className="mt-2 btn btn-sm btn-outline w-20 text-xs text-white">Search</button>
                         </ul>
                     </div>
-                    <div className="bg-gray-300 p-1 rounded-lg"> 
+                    <div className="bg-gray-300 p-1 rounded-lg">
                         <Link><img className="w-8 md:w-16" src="/logo.svg" alt="company-logo" /></Link>
                     </div>
                 </div>
@@ -37,9 +62,33 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link to={'/'} className="btn btn-ghost text-lg"><RiShoppingBagLine /></Link>
-                    <button className="hidden lg:inline-flex btn btn-ghost text-lg text-white"><CiSearch /></button>
-                    <Link to={'/'} className="btn btn-outline btn-accent">Appointment</Link>
+                    {
+                        isLoading ?
+                            <p>Loading</p>
+                            :
+                            <div>
+                                {user ?
+                                    <div>
+                                        {userDropdown}
+                                        <Link to={'/'} className="btn btn-ghost text-lg"><RiShoppingBagLine /></Link>
+                                        <button className="hidden lg:inline-flex btn btn-ghost text-lg text-white"><CiSearch /></button>
+                                        <Link to={'/'} className="btn btn-outline btn-accent">Appointment</Link>
+                                    </div>
+                                    :
+                                    <div>
+                                        <Link to={'/login'}><button className="btn btn-outline btn-accent">Login</button></Link>
+                                    </div>
+                                }
+                            </div>
+                    }
+                    {/* <div>
+                        <Link><button className="btn btn-outline btn-accent">Login</button></Link>
+                    </div>
+                    <div>
+                        <Link to={'/'} className="btn btn-ghost text-lg"><RiShoppingBagLine /></Link>
+                        <button className="hidden lg:inline-flex btn btn-ghost text-lg text-white"><CiSearch /></button>
+                        <Link to={'/'} className="btn btn-outline btn-accent">Appointment</Link>
+                    </div> */}
                 </div>
             </div>
         </div>
