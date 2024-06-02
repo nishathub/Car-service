@@ -3,6 +3,7 @@ import FeaturesSection from "../Components/HomePageComponents/FeaturesSection";
 import HomeAbout from "../Components/HomePageComponents/HomeAbout";
 import HomeBanner from "../Components/HomePageComponents/HomeBanner";
 import ServicesComponent from "../Components/HomePageComponents/ServicesComponent";
+import Testimonial from "../Components/HomePageComponents/Testimonial";
 
 const Home = () => {
 
@@ -22,6 +23,9 @@ const Home = () => {
             </div>
             <div className="py-4 lg:py-12">
                 <FeaturesSection></FeaturesSection>
+            </div>
+            <div className="py-4 lg:py-12">
+                <Testimonial></Testimonial>
             </div>
         </div>
     );
