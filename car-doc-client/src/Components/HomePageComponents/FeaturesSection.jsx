@@ -19,7 +19,7 @@ const FeaturesSection = () => {
             </div>
 
             <Marquee >
-                <div className="mt-12 flex flex-wrap gap-6 px-4 items-center justify-center">
+                <div className="mt-12 flex flex-wrap gap-8 px-4 items-center justify-center">
                     <div className="w-40 flex flex-col gap-4 items-center p-4 border border-gray-500 rounded-lg hover:invert duration-300 text-accent">
                         <div> <img src={expertIcon} alt="group-icon" /></div>
                         <div><h4 className="font-bold">Expert Team</h4></div>
