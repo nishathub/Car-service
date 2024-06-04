@@ -13,19 +13,19 @@ const Home = () => {
             <div className="pb-4 lg:pb-12" id="home-banner">
                 <HomeBanner />
             </div>
-            <div className="py-4 lg:py-12 border" id="home-about">
+            <div className="py-4 lg:py-12" id="home-about">
                 <HomeAbout />
             </div>
-            <div className="py-4 lg:py-12 border" id="services-component">
+            <div className="py-4 lg:py-12" id="services-component">
                 <ServicesComponent />
             </div>
-            <div className="py-4 lg:py-12 border" id="contact-card">
+            <div className="py-4 lg:py-12" id="contact-card">
                 <ContactCard />
             </div>
-            <div className="py-4 lg:py-12 border" id="features-section">
+            <div className="py-4 lg:py-12" id="features-section">
                 <FeaturesSection />
             </div>
-            <div className="py-4 lg:py-12 border" id="testimonial">
+            <div className="py-4 lg:py-12" id="testimonial">
                 <Testimonial />
             </div>
            
