@@ -26,6 +26,21 @@ const Checkout = () => {
         }
 
         console.log(orderInfo);
+
+        // post orders using fetch
+
+        fetch('http://localhost:5000/allOrders', {
+            method: 'POST',
+            headers: {
+                'content-type' : 'application/json'
+            },
+            body: JSON.stringify(orderInfo)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => console.log(error))
     }
 
     return (

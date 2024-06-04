@@ -3,6 +3,7 @@ const { getDB } = require("../config/db");
 
 const userCollection = () => getDB().collection('users');
 const serviceCollection = () => getDB().collection('services');
+const orderCollection = () => getDB().collection('orders');
 
 // get All Users
 const getAllUsers = async (req, res) => {
@@ -18,6 +19,16 @@ const getAllServices = async (req, res) => {
     try {
         const allServices = await serviceCollection().find().toArray();
         res.send(allServices);
+    } catch (error) {
+        res.status(500).send(error)
+    }
+}
+
+// get All Orders
+const getAllOrders = async (req, res) => {
+    try {
+        const allOrders = await orderCollection().find().toArray();
+        res.send(allOrders);
     } catch (error) {
         res.status(500).send(error)
     }
@@ -50,5 +61,16 @@ const createUser = async (req, res) => {
     }
 }
 
+// Create Order
+const createOrder = async (req, res) => {
+    try {
+        const newOrder = req.body;
+        const result = await orderCollection().insertOne(newOrder);
+        res.send(result);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
 
-module.exports = {getAllUsers, createUser, getAllServices, getOneService};
+
+module.exports = {getAllUsers, getAllOrders, createUser, getAllServices, getOneService, createOrder};
