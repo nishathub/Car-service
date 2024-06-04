@@ -10,23 +10,23 @@ const Home = () => {
 
     return (
         <div className="">
-            <div className="pb-4 lg:pb-12">
-                <HomeBanner></HomeBanner>
+            <div className="pb-4 lg:pb-12" id="home-banner">
+                <HomeBanner />
             </div>
-            <div className="py-4 lg:py-12">
-                <HomeAbout></HomeAbout>
+            <div className="py-4 lg:py-12 border" id="home-about">
+                <HomeAbout />
             </div>
-            <div className="py-4 lg:py-12">
-                <ServicesComponent></ServicesComponent>
+            <div className="py-4 lg:py-12 border" id="services-component">
+                <ServicesComponent />
             </div>
-            <div className="py-4 lg:py-12">
-                <ContactCard></ContactCard>
+            <div className="py-4 lg:py-12 border" id="contact-card">
+                <ContactCard />
             </div>
-            <div className="py-4 lg:py-12">
-                <FeaturesSection></FeaturesSection>
+            <div className="py-4 lg:py-12 border" id="features-section">
+                <FeaturesSection />
             </div>
-            <div className="py-4 lg:py-12">
-                <Testimonial></Testimonial>
+            <div className="py-4 lg:py-12 border" id="testimonial">
+                <Testimonial />
             </div>
            
         </div>

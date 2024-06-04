@@ -1,3 +1,4 @@
+import { Link as ScrollLink } from 'react-scroll';
 import { Link } from "react-router-dom";
 import { RiShoppingBagLine } from "react-icons/ri";
 import { CiSearch } from "react-icons/ci";
@@ -17,15 +18,19 @@ const Navbar = () => {
             .catch(error => console.error(error))
     }
 
+    // I have used scrollLink for focusing homepage sections scroll behave
+    // need to install react-scroll
+    // offset is set to act as margin top
+    // active class and spy are used to style active nav
     const links =
-        <>
-            <li><Link to={'/'}>Home</Link></li>
-            <li><Link to={'/'}>About</Link></li>
-            <li><Link to={'/'}>Service</Link></li>
-            <li><Link to={'/'}>Blog</Link></li>
-            <li><Link to={'/'}>Contact</Link></li>
-
-        </>;
+    <>
+    <li><ScrollLink to="home-banner" smooth={true} duration={500} offset={-60} activeClass="active" spy={true}>Home</ScrollLink></li>
+    <li><ScrollLink to="home-about" smooth={true} duration={500} offset={-60} activeClass="active" spy={true}>About</ScrollLink></li>
+    <li><ScrollLink to="services-component" smooth={true} duration={500} offset={-60} activeClass="active" spy={true}>Services</ScrollLink></li>
+    <li><ScrollLink to="contact-card" smooth={true} duration={500} offset={-60} activeClass="active" spy={true}>Contact</ScrollLink></li>
+    <li><ScrollLink to="features-section" smooth={true} duration={500} offset={-50} activeClass="active" spy={true}>Features</ScrollLink></li>
+    <li><ScrollLink to="testimonial" smooth={true} duration={500} offset={-50} activeClass="active" spy={true}>Testimonial</ScrollLink></li>
+</>
     const userDropdown =
         <>
             <div className="dropdown dropdown-end">

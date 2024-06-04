@@ -42,7 +42,7 @@ const Checkout = () => {
                     <div className=" space-y-4">
                         <div className="flex flex-col md:flex-row gap-4">
                             <input className="md:w-1/2 input input-bordered" type="text" name="name" defaultValue={user?.displayName} placeholder="Your Name" />
-                            <input className="md:w-1/2 input input-bordered" type="date" name="date" />
+                            <input className="md:w-1/2 input input-bordered" type="date" name="date" required/>
                         </div>
                         <div className="flex flex-col md:flex-row gap-4">
                             <input className="md:w-1/2 input input-bordered" type="email" name="email" defaultValue={user?.email} placeholder="Your Email" />
