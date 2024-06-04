@@ -14,7 +14,7 @@ const ServiceCard = ({ service }) => {
                     <h4 className="text-accent">$ {price}</h4>
                 </div>
                 <div>
-                    <Link><button className="text-error text-2xl hover:text-5xl duration-500">&rarr;</button></Link>
+                    <Link to={`/checkout/${service._id}`}><button className="text-error text-2xl hover:text-5xl duration-500">&rarr;</button></Link>
                 </div>
             </div>
         </div>

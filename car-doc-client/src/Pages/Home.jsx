@@ -4,6 +4,7 @@ import HomeAbout from "../Components/HomePageComponents/HomeAbout";
 import HomeBanner from "../Components/HomePageComponents/HomeBanner";
 import ServicesComponent from "../Components/HomePageComponents/ServicesComponent";
 import Testimonial from "../Components/HomePageComponents/Testimonial";
+import TestimonialCarousel from "../Components/HomePageComponents/TestimonialCarousel";
 
 const Home = () => {
 
@@ -27,6 +28,7 @@ const Home = () => {
             <div className="py-4 lg:py-12">
                 <Testimonial></Testimonial>
             </div>
+           
         </div>
     );
 };

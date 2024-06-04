@@ -21,7 +21,7 @@ async function startServer () {
         app.get('/', (req, res) => {
             res.send('carService running')
         });
-        app.listen(() => {
+        app.listen(port, () => {
             console.log(`carServer is running on port ${port}`)
         });
 

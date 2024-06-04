@@ -1,0 +1,22 @@
+.testimonial-enter {
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 2s ease-in-out;
+  }
+  
+  .testimonial-enter-active {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+  
+  .testimonial-exit {
+    opacity: 1;
+    transform: translateX(0%);
+    transition: all 2s ease-in-out;
+  }
+  
+  .testimonial-exit-active {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  

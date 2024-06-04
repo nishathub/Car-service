@@ -7,7 +7,7 @@ const ServicesComponent = () => {
 
     useEffect(() => {
         try {
-            fetch('services.json')
+            fetch('http://localhost:5000/allServices')
                 .then(res => res.json())
                 .then(data => {
                     setServices(data);
@@ -26,14 +26,21 @@ const ServicesComponent = () => {
                 <h4 className="text-xl md:text-3xl font-bold">Our Service Area</h4>
                 <p className="lg:max-w-lg mx-auto capitalize">the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-4 "> 
-                {
-                    services.map(service =>
-                        <ServiceCard
-                            key={service._id}
-                            service={service}>
-                        </ServiceCard>)
+            <div>
+                {isLoading ? <p className="text-center">Loading</p>
+                    :
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-4 ">
+                        {
+                            services.map(service =>
+                                <ServiceCard
+                                    key={service._id}
+                                    service={service}>
+                                </ServiceCard>)
+                        }
+
+                    </div>
                 }
+
             </div>
             <div className="text-center">
                 <button className="btn btn-outline btn-error btn-sm md:btn-md">More Services</button>
