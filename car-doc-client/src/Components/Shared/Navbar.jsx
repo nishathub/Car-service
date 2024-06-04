@@ -10,7 +10,6 @@ import { FaUser } from "react-icons/fa";
 
 const Navbar = () => {
     const { user, isLoading, logoutUser } = useContext(carDoctorContext);
-    console.log(user, isLoading);
 
     const handleLogout = () => {
         logoutUser()

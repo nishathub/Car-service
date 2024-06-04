@@ -28,7 +28,11 @@ const getOneService = async (req, res) => {
     try {
         const serviceID = req.params.serviceID;
         const query = {_id : new ObjectId(serviceID)};
-        const clickedService = await serviceCollection().findOne(query);
+        //options-projection to get limited data (its boolean, 1 means we want that data)
+        const options = {
+            projection: {title: 1, service_id: 1, price: 1, img: 1} // here we will only get the mentioned data
+        }
+        const clickedService = await serviceCollection().findOne(query, options);
         res.send(clickedService);
     } catch (error) {
         res.status(500).send(error);
