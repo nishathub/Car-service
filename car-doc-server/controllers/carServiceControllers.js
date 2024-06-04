@@ -25,9 +25,15 @@ const getAllServices = async (req, res) => {
 }
 
 // get All Orders
+// WE USED QUERY HERE TO GET SPECIFIC USER DATA
 const getAllOrders = async (req, res) => {
     try {
-        const allOrders = await orderCollection().find().toArray();
+        console.log(req.query.email);
+        let query = {};
+        if(req.query?.email){
+            query = {email: req.query.email}
+        }
+        const allOrders = await orderCollection().find(query).toArray();
         res.send(allOrders);
     } catch (error) {
         res.status(500).send(error)

@@ -5,6 +5,7 @@ import Roots from "../Roots/Roots";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import Checkout from "../Pages/Checkout";
+import Cart from "../Pages/Cart";
 
 const Routes = createBrowserRouter([
     {
@@ -23,6 +24,10 @@ const Routes = createBrowserRouter([
         {
             path: "/register",
             element: <Register></Register>,
+        },
+        {
+            path: "/cart",
+            element: <Cart></Cart>,
         },
         {
             path: "/checkout/:serviceID",

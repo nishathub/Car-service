@@ -74,7 +74,7 @@ const Navbar = () => {
                                 {user ?
                                     <div>
                                         {userDropdown}
-                                        <Link to={'/'} className="btn btn-ghost text-lg"><RiShoppingBagLine /></Link>
+                                        <Link to={'/cart'} className="btn btn-ghost text-lg"><RiShoppingBagLine /></Link>
                                         <button className="hidden lg:inline-flex btn btn-ghost text-lg text-white"><CiSearch /></button>
                                         <Link to={'/'} className="btn btn-outline btn-accent">Appointment</Link>
                                     </div>

@@ -4,7 +4,7 @@ import HomeAbout from "../Components/HomePageComponents/HomeAbout";
 import HomeBanner from "../Components/HomePageComponents/HomeBanner";
 import ServicesComponent from "../Components/HomePageComponents/ServicesComponent";
 import Testimonial from "../Components/HomePageComponents/Testimonial";
-import TestimonialCarousel from "../Components/HomePageComponents/TestimonialCarousel";
+// import TestimonialCarousel from "../Components/HomePageComponents/TestimonialCarousel";
 
 const Home = () => {
 

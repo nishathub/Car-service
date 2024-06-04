@@ -5,7 +5,7 @@ const HomeAbout = () => {
         <div className="grid grid-cols-1 lg:grid-cols-7 gap-8">
             {/* here, we set bg in one div and add an absolute div inside of it to get targeted style  */}
             <div className="relative col-span-1 lg:col-span-3">
-                <h2 className="lg:hidden text-error text-lg mb-4">About Us</h2>
+                <h2 className="lg:hidden text-center lg:text-left text-error text-lg mb-4">About Us</h2>
 
                 <div className="bg-[url('https://i.ibb.co/vwmhPtf/person.jpg')] w-full h-60 lg:w-[350px] lg:h-[320px] bg-cover rounded-lg">
                     {/* We can also remove bg and add img element to get similar style  */}

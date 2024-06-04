@@ -68,7 +68,7 @@ const Checkout = () => {
                         <input className="w-full input input-bordered" type="text" name="comment" placeholder="Brief Comment" />
                     </div>
                     <div>
-                        <input className="w-full btn btn-accent btn-sm md:btn-md" type="submit" value="Confirm Order" />
+                        <input className="w-full btn btn-accent font-bold" type="submit" value="Confirm Order" />
                     </div>
 
                 </form>
