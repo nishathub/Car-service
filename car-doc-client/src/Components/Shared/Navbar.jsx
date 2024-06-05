@@ -14,8 +14,6 @@ const Navbar = () => {
     const currentLocation = useLocation();
     const location = currentLocation.pathname;
 
-    
-
     const handleLogout = () => {
         logoutUser()
             .then(() => console.log('user logged out'))
@@ -46,9 +44,12 @@ const Navbar = () => {
             <div className="dropdown dropdown-end">
                 <div tabIndex={0} role="button" className="btn btn-ghost ">
                     <p><FaUser /></p>
+                    
                 </div>
-                <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-300 rounded-box w-52">
-                    <li onClick={handleLogout} className="text-error font-bold"><a>Logout</a></li>
+                <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] py-4 shadow bg-base-300 rounded-box w-52">
+                    <p className='text-lg text-center mb-2'>{user?.displayName}</p>
+                    <p className='text-center mb-2'>{user?.email}</p>
+                    <li onClick={handleLogout} className="text-error font-bold btn btn-xs mt-4"><a>Logout</a></li>
                 </ul>
             </div>
         </>
@@ -83,10 +84,10 @@ const Navbar = () => {
                             <div>
                                 {user ?
                                     <div>
-                                        {userDropdown}
                                         <Link to={'/cart'} className="btn btn-ghost text-lg"><RiShoppingBagLine /></Link>
                                         <button className="hidden lg:inline-flex btn btn-ghost text-lg text-white"><CiSearch /></button>
-                                        <Link to={'/'} className="btn btn-outline btn-accent">Appointment</Link>
+                                        {/* <Link to={'/'} className="btn btn-outline btn-accent">Appointment</Link> */}
+                                        {userDropdown}
                                     </div>
                                     :
                                     <div>
