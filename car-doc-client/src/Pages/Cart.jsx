@@ -7,16 +7,19 @@ const Cart = () => {
     const [orders, setOrders] = useState([]);
     const [isOrderFetching, setOrderFetching] = useState(true);
     const [isRefetch, setRefetch] = useState(false);
+    const [isAdmin, setAdmin] = useState(true);
 
     //WE USED QUERY (req.query) in the backend to get specific user data.
     useEffect(() => {
-        fetch(`http://localhost:5000/allOrders?email=${user?.email}`)
-            .then(res => res.json())
-            .then(data => {
-                setOrders(data);
-                setOrderFetching(false);
-                setRefetch(false);
-            })
+        if (user?.email) { // this conditioning is very crucial to avoid unnecessary fetching empty data
+            fetch(`http://localhost:5000/allOrders?email=${user?.email}`)
+                .then(res => res.json())
+                .then(data => {
+                    setOrders(data);
+                    setOrderFetching(false);
+                    setRefetch(false);
+                })
+        }
     }, [user, isRefetch])
 
     const handleRemoveOrders = id => {
@@ -49,22 +52,22 @@ const Cart = () => {
             },
             body: JSON.stringify(newStatus)
         })
-        .then(res => {
-            if (!res.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return res.json();
-        })
-        .then(data => {
-            console.log(data);
-            setRefetch(true);
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return res.json();
+            })
+            .then(data => {
+                console.log(data);
+                setRefetch(true);
 
-        })
-        .catch(error => {
-            console.error('There was a problem with the fetch operation:', error);
-        });
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
     }
-    
+
 
     return (
         <div className="pt-20">
@@ -77,11 +80,19 @@ const Cart = () => {
                     :
                     <div>
                         {
-                            !orders.length ?
-                                <div className="text-center h-screen"> <p className="text-error text-3xl">Cart is empty!</p>
-                                    <p className="mt-4 text-xl">Add some services to keep your vehicle smooth</p> </div>
+                            orders.length === 0 ?
+                                <div className="text-center h-screen">
+                                    <p className="text-error text-3xl">Cart is empty!</p>
+                                    <p className="mt-4 text-xl">Add some services to keep your vehicle smooth</p>
+                                </div>
                                 :
                                 <div>
+                                    <div>
+                                        {isAdmin &&
+                                            <div>
+                                                <p className="text-yellow-400 font-bold text-right my-4">You are Admin</p>
+                                            </div>}
+                                    </div>
                                     {/* table header  */}
                                     <div className="overflow-x-auto mb-4 bg-base-300">
                                         <table className="table">
@@ -108,6 +119,7 @@ const Cart = () => {
                                                 order={order}
                                                 handleRemoveOrders={handleRemoveOrders}
                                                 handleOrderConfirm={handleOrderConfirm}
+                                                isAdmin={isAdmin}
                                             ></CartItem>
                                         )
                                     }
