@@ -1,8 +1,8 @@
 import { Link as ScrollLink } from 'react-scroll';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { RiShoppingBagLine } from "react-icons/ri";
 import { CiSearch } from "react-icons/ci";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { carDoctorContext } from "../../AuthProvider/carDoctorContext";
 import { FaUser } from "react-icons/fa";
 
@@ -11,6 +11,10 @@ import { FaUser } from "react-icons/fa";
 
 const Navbar = () => {
     const { user, isLoading, logoutUser } = useContext(carDoctorContext);
+    const currentLocation = useLocation();
+    const location = currentLocation.pathname;
+
+    
 
     const handleLogout = () => {
         logoutUser()
@@ -22,15 +26,21 @@ const Navbar = () => {
     // need to install react-scroll
     // offset is set to act as margin top
     // active class and spy are used to style active nav
-    const links =
-    <>
-    <li><ScrollLink to="home-banner" smooth={true} duration={500} offset={-60} activeClass="active" spy={true}>Home</ScrollLink></li>
-    <li><ScrollLink to="home-about" smooth={true} duration={500} offset={-60} activeClass="active" spy={true}>About</ScrollLink></li>
-    <li><ScrollLink to="services-component" smooth={true} duration={500} offset={-60} activeClass="active" spy={true}>Services</ScrollLink></li>
-    <li><ScrollLink to="contact-card" smooth={true} duration={500} offset={-60} activeClass="active" spy={true}>Contact</ScrollLink></li>
-    <li><ScrollLink to="features-section" smooth={true} duration={500} offset={-50} activeClass="active" spy={true}>Features</ScrollLink></li>
-    <li><ScrollLink to="testimonial" smooth={true} duration={500} offset={-50} activeClass="active" spy={true}>Testimonial</ScrollLink></li>
-</>
+    const homeNavLinks =
+        <>
+            <li><ScrollLink to="home-banner" smooth={true} duration={500} offset={-60} activeClass="active" spy={true}>Home</ScrollLink></li>
+            <li><ScrollLink to="home-about" smooth={true} duration={500} offset={-60} activeClass="active" spy={true}>About</ScrollLink></li>
+            <li><ScrollLink to="services-component" smooth={true} duration={500} offset={-60} activeClass="active" spy={true}>Services</ScrollLink></li>
+            <li><ScrollLink to="contact-card" smooth={true} duration={500} offset={-60} activeClass="active" spy={true}>Contact</ScrollLink></li>
+            <li><ScrollLink to="features-section" smooth={true} duration={500} offset={-50} activeClass="active" spy={true}>Features</ScrollLink></li>
+            <li><ScrollLink to="testimonial" smooth={true} duration={500} offset={-50} activeClass="active" spy={true}>Testimonial</ScrollLink></li>
+        </>
+
+    const navLinks =
+        <>
+            <li><Link to={'/'}>Home</Link></li>
+        </>
+
     const userDropdown =
         <>
             <div className="dropdown dropdown-end">
@@ -52,7 +62,7 @@ const Navbar = () => {
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </div>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                            {links}
+                            {location === '/' ? homeNavLinks : navLinks}
                             <button className="mt-2 btn btn-sm btn-outline w-20 text-xs text-white">Search</button>
                         </ul>
                     </div>
@@ -62,7 +72,7 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
-                        {links}
+                    {location === '/' ? homeNavLinks : navLinks}
                     </ul>
                 </div>
                 <div className="navbar-end">
