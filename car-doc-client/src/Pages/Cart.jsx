@@ -3,11 +3,10 @@ import { carDoctorContext } from "../AuthProvider/carDoctorContext";
 import CartItem from "../Components/CartItem/CartItem";
 
 const Cart = () => {
-    const { user } = useContext(carDoctorContext);
+    const { user, isAdmin } = useContext(carDoctorContext);
     const [orders, setOrders] = useState([]);
     const [isOrderFetching, setOrderFetching] = useState(true);
     const [isRefetch, setRefetch] = useState(false);
-    const [isAdmin, setAdmin] = useState(true);
 
     //WE USED QUERY (req.query) in the backend to get specific user data.
     useEffect(() => {
