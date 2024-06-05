@@ -55,20 +55,20 @@ const getOneService = async (req, res) => {
         res.status(500).send(error);
     }
 }
-const getOneOrder = async (req, res) => {
-    try {
-        const serviceID = req.params.orderID;
-        const query = {_id : new ObjectId(serviceID)};
-        //options-projection to get limited data (its boolean, 1 means we want that data)
-        // const options = {
-        //     projection: {title: 1, service_id: 1, price: 1, img: 1} // here we will only get the mentioned data
-        // }
-        const clickedOrder = await orderCollection().findOne(query);
-        res.send(clickedOrder);
-    } catch (error) {
-        res.status(500).send(error);
-    }
-}
+// const getOneOrder = async (req, res) => {
+//     try {
+//         const serviceID = req.params.orderID;
+//         const query = {_id : new ObjectId(serviceID)};
+//         //options-projection to get limited data (its boolean, 1 means we want that data)
+//         // const options = {
+//         //     projection: {title: 1, service_id: 1, price: 1, img: 1} // here we will only get the mentioned data
+//         // }
+//         const clickedOrder = await orderCollection().findOne(query);
+//         res.send(clickedOrder);
+//     } catch (error) {
+//         res.status(500).send(error);
+//     }
+// }
 
 // Create User
 const createUser = async (req, res) => {
@@ -106,4 +106,4 @@ const deleteOrder = async(req, res) => {
 }
 
 
-module.exports = {getAllUsers, getAllOrders, getOneOrder, createUser, getAllServices, getOneService, createOrder, deleteOrder};
+module.exports = {getAllUsers, getAllOrders, createUser, getAllServices, getOneService, createOrder, deleteOrder};
