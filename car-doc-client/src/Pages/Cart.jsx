@@ -68,10 +68,10 @@ const Cart = () => {
                                                                     </div>
                                                                 </div>
                                                             </td>
-                                                            <td className="w-32">
+                                                            <td className="w-28 md:w-32">
                                                                 <span>{order.serviceName}</span>
                                                             </td>
-                                                            <td className="w-32 p-2"> <span>{order.date}</span> <br />
+                                                            <td className="w-22 md:w-fit p-2"> <span>{order.date}</span> <br />
                                                                 <span className="md:hidden text-accent">$ {order.price}</span>
                                                             </td>
                                                             <td className="hidden md:inline-flex">$ {order.price}</td>
