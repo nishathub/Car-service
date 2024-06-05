@@ -23,7 +23,8 @@ const Checkout = () => {
             serviceID: service_id,
             serviceName: title,
             price,
-            img
+            img,
+            status: 'pending'
         }
 
         console.log(orderInfo);

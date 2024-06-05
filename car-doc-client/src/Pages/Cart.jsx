@@ -1,10 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { carDoctorContext } from "../AuthProvider/carDoctorContext";
+import CartItem from "../Components/CartItem/CartItem";
 
 const Cart = () => {
     const { user } = useContext(carDoctorContext);
     const [orders, setOrders] = useState([]);
     const [isOrderFetching, setOrderFetching] = useState(true);
+    const [isRefetch, setRefetch] = useState(false);
 
     //WE USED QUERY (req.query) in the backend to get specific user data.
     useEffect(() => {
@@ -13,8 +15,9 @@ const Cart = () => {
             .then(data => {
                 setOrders(data);
                 setOrderFetching(false);
+                setRefetch(false);
             })
-    }, [user])
+    }, [user, isRefetch])
 
     const handleRemoveOrders = id => {
         console.log(id);
@@ -30,7 +33,38 @@ const Cart = () => {
                 }
             })
     }
-    console.log(orders);
+
+    // according to command, we will perform action (cancel/confirm)
+
+    const handleOrderConfirm = (event, id) => {
+        console.log(id);
+        const newStatus = {
+            status: event.target.textContent
+        };
+        console.log(newStatus);
+        fetch(`http://localhost:5000/allOrders/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newStatus)
+        })
+        .then(res => {
+            if (!res.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return res.json();
+        })
+        .then(data => {
+            console.log(data);
+            setRefetch(true);
+
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+    
 
     return (
         <div className="pt-20">
@@ -69,36 +103,12 @@ const Cart = () => {
                                     {
                                         orders.map(order =>
 
-                                            <div key={order._id} className="overflow-x-auto mb-4 bg-base-300">
-                                                <table className="table">
-
-                                                    <tbody className="">
-                                                        {/* row 1 */}
-                                                        <tr className="flex items-center justify-between">
-                                                            <th className="w-12 md:w-fit">
-                                                                <button onClick={() => handleRemoveOrders(order._id)} className="text-lg btn btn-error btn-sm btn-circle">X</button>
-                                                            </th>
-                                                            <td className="w-12 md:w-32 hidden md:inline-flex ">
-                                                                <div className="avatar">
-                                                                    <div className=" w-12 h-12 md:w-24 md:h-24">
-                                                                        <img className="" src={order.img ? order.img : "https://img.daisyui.com/tailwind-css-component-profile-2@56w.png"} alt="service-image" />
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td className="w-28 md:w-32 ">
-                                                                <span>{order.serviceName}</span>
-                                                            </td>
-                                                            <td className="w-22 md:w-fit p-2"> <span>{order.date}</span> <br />
-                                                                <span className="md:hidden text-accent">$ {order.price}</span>
-                                                            </td>
-                                                            <td className="hidden md:inline-flex">$ {order.price}</td>
-                                                            <th>
-                                                                <button className="btn btn-ghost btn-xs">details</button>
-                                                            </th>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                            <CartItem
+                                                key={order._id}
+                                                order={order}
+                                                handleRemoveOrders={handleRemoveOrders}
+                                                handleOrderConfirm={handleOrderConfirm}
+                                            ></CartItem>
                                         )
                                     }
                                 </div>

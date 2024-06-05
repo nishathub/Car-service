@@ -55,20 +55,39 @@ const getOneService = async (req, res) => {
         res.status(500).send(error);
     }
 }
-// const getOneOrder = async (req, res) => {
-//     try {
-//         const serviceID = req.params.orderID;
-//         const query = {_id : new ObjectId(serviceID)};
-//         //options-projection to get limited data (its boolean, 1 means we want that data)
-//         // const options = {
-//         //     projection: {title: 1, service_id: 1, price: 1, img: 1} // here we will only get the mentioned data
-//         // }
-//         const clickedOrder = await orderCollection().findOne(query);
-//         res.send(clickedOrder);
-//     } catch (error) {
-//         res.status(500).send(error);
-//     }
-// }
+//get One Order
+const getOneOrder = async (req, res) => {
+    try {
+        const orderID = req.params.orderID;
+        const query = {_id : new ObjectId(orderID)};
+        //options-projection to get limited data (its boolean, 1 means we want that data)
+        // const options = {
+        //     projection: {title: 1, service_id: 1, price: 1, img: 1} // here we will only get the mentioned data
+        // }
+        const result = await orderCollection().findOne(query);
+        res.send(result);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
+const updateOrderStatus = async (req, res) => {
+    try {
+        const orderID = req.params.orderID;
+        console.log(orderID);
+        const filter = {_id : new ObjectId(orderID)};
+        const newStatus = req.body;
+        console.log(newStatus.status);
+        const updateDoc = {
+            $set: {
+              status: newStatus.status
+          }
+        };
+        const result = await orderCollection().updateOne(filter, updateDoc);
+        res.send(result);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
 
 // Create User
 const createUser = async (req, res) => {
@@ -106,4 +125,4 @@ const deleteOrder = async(req, res) => {
 }
 
 
-module.exports = {getAllUsers, getAllOrders, createUser, getAllServices, getOneService, createOrder, deleteOrder};
+module.exports = {getAllUsers, getAllOrders, createUser, getAllServices, getOneService, getOneOrder, createOrder, updateOrderStatus, deleteOrder};
