@@ -23,6 +23,7 @@ const Checkout = () => {
             serviceID: service_id,
             serviceName: title,
             price,
+            img
         }
 
         console.log(orderInfo);

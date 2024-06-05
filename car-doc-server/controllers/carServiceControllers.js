@@ -28,7 +28,7 @@ const getAllServices = async (req, res) => {
 // WE USED QUERY HERE TO GET SPECIFIC USER DATA
 const getAllOrders = async (req, res) => {
     try {
-        console.log(req.query.email);
+        console.log('query email: ',req.query.email);
         let query = {};
         if(req.query?.email){
             query = {email: req.query.email}
@@ -51,6 +51,20 @@ const getOneService = async (req, res) => {
         }
         const clickedService = await serviceCollection().findOne(query, options);
         res.send(clickedService);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
+const getOneOrder = async (req, res) => {
+    try {
+        const serviceID = req.params.orderID;
+        const query = {_id : new ObjectId(serviceID)};
+        //options-projection to get limited data (its boolean, 1 means we want that data)
+        // const options = {
+        //     projection: {title: 1, service_id: 1, price: 1, img: 1} // here we will only get the mentioned data
+        // }
+        const clickedOrder = await orderCollection().findOne(query);
+        res.send(clickedOrder);
     } catch (error) {
         res.status(500).send(error);
     }
@@ -78,5 +92,18 @@ const createOrder = async (req, res) => {
     }
 }
 
+// DELETE Orders 
+const deleteOrder = async(req, res) => {
+    try {
+        const orderID = req.params.orderID;
+        const query = {_id : new ObjectId(orderID)};
+        const result = await orderCollection().deleteOne(query);
+        res.send(result);
 
-module.exports = {getAllUsers, getAllOrders, createUser, getAllServices, getOneService, createOrder};
+    } catch (error) {
+        res.status(500).send(error)
+    }
+}
+
+
+module.exports = {getAllUsers, getAllOrders, getOneOrder, createUser, getAllServices, getOneService, createOrder, deleteOrder};
