@@ -2,7 +2,7 @@ import { useState } from "react";
 
 
 const CartItem = ({ order, handleRemoveOrders, handleOrderConfirm, isAdmin }) => {
-    const { _id, img, date, price, serviceName, status } = order;
+    const { _id, img, date, price, serviceName, status, email } = order;
 
 
 
@@ -25,9 +25,13 @@ const CartItem = ({ order, handleRemoveOrders, handleOrderConfirm, isAdmin }) =>
                 <tbody className="">
                     {/* row 1 */}
                     <tr className="flex items-center justify-between">
-                        <th className="w-12 md:w-fit">
+                        <th hidden={isAdmin ? true : false} className="w-12 md:w-fit">
                             <button disabled={isAdmin ? true : false} onClick={() => handleRemoveOrders(_id)} className="text-lg btn btn-error btn-sm btn-circle">X</button>
                         </th>
+                        <td hidden={isAdmin ? false : true} className="">
+                            <span className=" text-wrap">{email}</span>
+                        </td>
+                        
                         <td className="w-12 md:w-32 hidden md:inline-flex ">
                             <div className="avatar">
                                 <div className=" w-12 h-12 md:w-24 md:h-24">

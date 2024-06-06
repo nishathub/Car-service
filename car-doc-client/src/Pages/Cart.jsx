@@ -9,9 +9,11 @@ const Cart = () => {
     const [isRefetch, setRefetch] = useState(false);
 
     //WE USED QUERY (req.query) in the backend to get specific user data.
+    // For admin, fetch all order, for others, only theirs ;
+    const URL = isAdmin ? `http://localhost:5000/allOrders` : `http://localhost:5000/allOrders?email=${user?.email}`;
     useEffect(() => {
         if (!isLoading) { // this conditioning is very crucial to avoid unnecessary fetching empty data 
-            fetch(`http://localhost:5000/allOrders?email=${user?.email}`)
+            fetch(URL)
                 .then(res => res.json())
                 .then(data => {
                     setOrders(data);
@@ -19,7 +21,7 @@ const Cart = () => {
                     setRefetch(false); // necessary for admin status command
                 })
         }
-    }, [user, isRefetch, isLoading])
+    }, [user, isRefetch, isLoading, URL])
 
     const handleRemoveOrders = id => {
         console.log(id);
@@ -97,7 +99,8 @@ const Cart = () => {
                                         <table className="table">
                                             <thead>
                                                 <tr className="flex justify-between text-gray-300 tracking-wider">
-                                                    <th>Delete</th>
+                                                    <th hidden={isAdmin}>Delete</th>
+                                                    <th hidden={isAdmin ? false : true}>Email</th>
                                                     <th className="hidden md:inline-flex">Image</th>
                                                     <th>Service</th>
                                                     <th className="hidden md:inline-flex">Date</th>

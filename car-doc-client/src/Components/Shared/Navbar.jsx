@@ -10,7 +10,7 @@ import { FaUser } from "react-icons/fa";
 
 
 const Navbar = () => {
-    const { user, isLoading, logoutUser } = useContext(carDoctorContext);
+    const { user, isLoading, isAdmin, logoutUser } = useContext(carDoctorContext);
     const currentLocation = useLocation();
     const location = currentLocation.pathname;
 
@@ -37,17 +37,37 @@ const Navbar = () => {
     const navLinks =
         <>
             <li><Link to={'/'}>Home</Link></li>
-        </>
+        </>;
+    const adminNavLinks =
+        <>
+            <li><Link to={'/'}>Home</Link></li>
+            <li><Link to={'/'}>AddService</Link></li>
+            <li><Link to={'/'}>Inventory</Link></li>
+            <li><Link to={'/cart'}>Order</Link></li>
+        </>;
 
+        const navBarDisplay = () => {
+            if(isAdmin){
+                return adminNavLinks;
+            } else if(!isAdmin && location === '/'){
+                return homeNavLinks;
+            }
+            
+            return navLinks
+        };
+
+        const adminStyle = {
+            color: 'yellow',
+        }
     const userDropdown =
         <>
             <div className="dropdown dropdown-end">
                 <div tabIndex={0} role="button" className="btn btn-ghost ">
-                    <p><FaUser /></p>
+                    <p style={isAdmin ? adminStyle : ''}><FaUser /></p>
                     
                 </div>
                 <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] py-4 shadow bg-base-300 rounded-box w-52">
-                    <p className='text-lg text-center mb-2'>{user?.displayName}</p>
+                    <p className='text-lg text-center mb-2'>{user?.displayName} <span className='text-xs text-yellow-300' hidden={!isAdmin}>[Admin]</span></p>
                     <p className='text-center mb-2'>{user?.email}</p>
                     <li onClick={handleLogout} className="text-error font-bold btn btn-xs mt-4"><a>Logout</a></li>
                 </ul>
@@ -63,7 +83,7 @@ const Navbar = () => {
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </div>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                            {location === '/' ? homeNavLinks : navLinks}
+                            {navBarDisplay()}
                             <button className="mt-2 btn btn-sm btn-outline w-20 text-xs text-white">Search</button>
                         </ul>
                     </div>
@@ -73,7 +93,7 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
-                    {location === '/' ? homeNavLinks : navLinks}
+                    {navBarDisplay()}
                     </ul>
                 </div>
                 <div className="navbar-end">
@@ -84,7 +104,7 @@ const Navbar = () => {
                             <div>
                                 {user ?
                                     <div>
-                                        <Link to={'/cart'} className="btn btn-ghost text-lg"><RiShoppingBagLine /></Link>
+                                        <button hidden={isAdmin ? true : false}><Link to={'/cart'} className="btn btn-ghost text-lg"> <RiShoppingBagLine /></Link></button>
                                         <button className="hidden lg:inline-flex btn btn-ghost text-lg text-white"><CiSearch /></button>
                                         {/* <Link to={'/'} className="btn btn-outline btn-accent">Appointment</Link> */}
                                         {userDropdown}
