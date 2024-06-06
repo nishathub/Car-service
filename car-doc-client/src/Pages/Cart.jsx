@@ -3,23 +3,23 @@ import { carDoctorContext } from "../AuthProvider/carDoctorContext";
 import CartItem from "../Components/CartItem/CartItem";
 
 const Cart = () => {
-    const { user, isAdmin } = useContext(carDoctorContext);
+    const { user, isAdmin, isLoading } = useContext(carDoctorContext);
     const [orders, setOrders] = useState([]);
     const [isOrderFetching, setOrderFetching] = useState(true);
     const [isRefetch, setRefetch] = useState(false);
 
     //WE USED QUERY (req.query) in the backend to get specific user data.
     useEffect(() => {
-        if (user?.email) { // this conditioning is very crucial to avoid unnecessary fetching empty data
+        if (!isLoading) { // this conditioning is very crucial to avoid unnecessary fetching empty data 
             fetch(`http://localhost:5000/allOrders?email=${user?.email}`)
                 .then(res => res.json())
                 .then(data => {
                     setOrders(data);
-                    setOrderFetching(false);
-                    setRefetch(false);
+                    setOrderFetching(false); // only after fetching data, we make it false
+                    setRefetch(false); // necessary for admin status command
                 })
         }
-    }, [user, isRefetch])
+    }, [user, isRefetch, isLoading])
 
     const handleRemoveOrders = id => {
         console.log(id);
