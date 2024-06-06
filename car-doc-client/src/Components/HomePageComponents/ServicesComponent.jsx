@@ -3,7 +3,10 @@ import ServiceCard from "./ServiceCard";
 
 const ServicesComponent = () => {
     const [services, setServices] = useState([]);
+    const [displayServices, setDisplayServices] = useState([]);
+    const [displayCount, setDisplayCount] = useState(3);
     const [isLoading, setLoading] = useState(true);
+
 
     useEffect(() => {
         try {
@@ -11,6 +14,7 @@ const ServicesComponent = () => {
                 .then(res => res.json())
                 .then(data => {
                     setServices(data);
+                    setDisplayServices(data.slice(0, 3));
                     setLoading(false);
                 })
         } catch (error) {
@@ -18,6 +22,22 @@ const ServicesComponent = () => {
             setLoading(false)
         }
     }, [])
+
+    const handleMoreServiceClick = (e) => {
+
+        // every click will show extra 3 services with previous items
+        const newDisplayCount = displayCount + 3;
+        const filteredService = services.slice(0, newDisplayCount);
+        setDisplayServices(filteredService);
+        setDisplayCount(displayCount + 3);
+
+        // Hide the MoreService Button when all data are loaded
+        if (newDisplayCount >= services.length) {
+            e.target.style.display = 'none';
+        }
+
+    }
+
 
     return (
         <div className="space-y-8 md:space-y-12 px-4">
@@ -31,7 +51,7 @@ const ServicesComponent = () => {
                     :
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-4 ">
                         {
-                            services.map(service =>
+                            displayServices.map(service =>
                                 <ServiceCard
                                     key={service._id}
                                     service={service}>
@@ -43,7 +63,7 @@ const ServicesComponent = () => {
 
             </div>
             <div className="text-center">
-                <button className="btn btn-outline btn-error btn-sm md:btn-md">More Services</button>
+                <button onClick={() => handleMoreServiceClick(event)} className="btn btn-outline btn-error btn-sm md:btn-md">More Services</button>
             </div>
         </div>
     );
