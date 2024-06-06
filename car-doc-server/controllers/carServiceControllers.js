@@ -1,5 +1,7 @@
+require('dotenv').config();
 const { ObjectId } = require("mongodb");
 const { getDB } = require("../config/db");
+const jwt = require('jsonwebtoken');
 
 const userCollection = () => getDB().collection('users');
 const serviceCollection = () => getDB().collection('services');
@@ -56,20 +58,20 @@ const getOneService = async (req, res) => {
     }
 }
 //get One Order
-const getOneOrder = async (req, res) => {
-    try {
-        const orderID = req.params.orderID;
-        const query = {_id : new ObjectId(orderID)};
-        //options-projection to get limited data (its boolean, 1 means we want that data)
-        // const options = {
-        //     projection: {title: 1, service_id: 1, price: 1, img: 1} // here we will only get the mentioned data
-        // }
-        const result = await orderCollection().findOne(query);
-        res.send(result);
-    } catch (error) {
-        res.status(500).send(error);
-    }
-}
+// const getOneOrder = async (req, res) => {
+//     try {
+//         const orderID = req.params.orderID;
+//         const query = {_id : new ObjectId(orderID)};
+//         //options-projection to get limited data (its boolean, 1 means we want that data)
+//         // const options = {
+//         //     projection: {title: 1, service_id: 1, price: 1, img: 1} // here we will only get the mentioned data
+//         // }
+//         const result = await orderCollection().findOne(query);
+//         res.send(result);
+//     } catch (error) {
+//         res.status(500).send(error);
+//     }
+// }
 const updateOrderStatus = async (req, res) => {
     try {
         const orderID = req.params.orderID;
@@ -124,5 +126,19 @@ const deleteOrder = async(req, res) => {
     }
 }
 
+// AUTH RELATED API 
+const sendJWT = async(req, res) => {
+    const user = req.body;
+    const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
+    console.log('user : ', user, 'token : ', {token}, 'secret : ', process.env.ACCESS_TOKEN_SECRET);
+    res.send({token})
+}
 
-module.exports = {getAllUsers, getAllOrders, createUser, getAllServices, getOneService, getOneOrder, createOrder, updateOrderStatus, deleteOrder};
+
+module.exports = {
+    getAllUsers, getAllOrders,
+     createUser, getAllServices, 
+     getOneService, createOrder, 
+     updateOrderStatus, deleteOrder,
+     sendJWT,
+    };

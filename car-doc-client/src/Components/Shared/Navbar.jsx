@@ -2,7 +2,7 @@ import { Link as ScrollLink } from 'react-scroll';
 import { Link, useLocation } from "react-router-dom";
 import { RiShoppingBagLine } from "react-icons/ri";
 import { CiSearch } from "react-icons/ci";
-import { useContext, useEffect, useState } from "react";
+import { useContext} from "react";
 import { carDoctorContext } from "../../AuthProvider/carDoctorContext";
 import { FaUser } from "react-icons/fa";
 
@@ -69,7 +69,7 @@ const Navbar = () => {
                     
                 </div>
                 <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] py-4 shadow bg-base-300 rounded-box w-52">
-                    <p className='text-lg text-center mb-2'>{user?.displayName} <span className='text-xs text-yellow-300' hidden={isAdmin ? false : true}>[Admin]</span></p>
+                    <p className='text-lg text-center mb-2'>{user?.displayName} <span className='text-xs text-yellow-300' hidden={isAdmin ? false : true}>Admin</span></p>
                     <p className='text-center mb-2'>{user?.email}</p>
                     <li onClick={handleLogout} className="text-error font-bold btn btn-xs mt-4"><a>Logout</a></li>
                 </ul>

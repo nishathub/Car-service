@@ -20,7 +20,22 @@ const Login = () => {
         loginUser(logEmail, logPassword)
             .then(result => {
                 console.log(result.user);
-            
+                const loggedUser = {logEmail};
+                // ACCESS TOKEN JWT
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type' : 'application/json'
+                    },
+                    body: JSON.stringify(loggedUser)
+                })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(error => console.error(error));
+
+                // REDIRECT TO OTHER PAGE
                 setTimeout(() => {
                     navigate(attemptURL ? attemptURL : '/');
                 }, 1000);

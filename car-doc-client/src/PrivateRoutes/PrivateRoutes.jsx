@@ -10,15 +10,12 @@ const PrivateRoutes = ({ children }) => {
     if (isLoading) {
         return <p className="pt-32">Loading..</p>
     }
-    else if (!user) {
+    if (!user) {
+        alert('Log in to view this page');
         return <Navigate state={attemptURL} to={'/login'}></Navigate>
     }
-
-    return (
-        <div>
-            {children}
-        </div>
-    )
+    
+    return children;
 
 };
 
