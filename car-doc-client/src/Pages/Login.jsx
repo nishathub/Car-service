@@ -1,11 +1,14 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { carDoctorContext } from "../AuthProvider/carDoctorContext";
 
 const Login = () => {
 
     const loginImage = '../../public/images/login/login.svg';
     const { loginUser } = useContext(carDoctorContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const attemptURL = location.state;
 
     const handleLogin = e => {
         e.preventDefault();
@@ -17,6 +20,10 @@ const Login = () => {
         loginUser(logEmail, logPassword)
             .then(result => {
                 console.log(result.user);
+            
+                setTimeout(() => {
+                    navigate(attemptURL ? attemptURL : '/');
+                }, 1000);
             })
             .catch(error => console.error(error))
     }

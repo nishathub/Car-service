@@ -37,6 +37,7 @@ const Navbar = () => {
     const navLinks =
         <>
             <li><Link to={'/'}>Home</Link></li>
+            <li><Link to={'/adminRoute'}>AdminConsole</Link></li>
         </>;
     const adminNavLinks =
         <>
@@ -44,6 +45,7 @@ const Navbar = () => {
             <li><Link to={'/'}>AddService</Link></li>
             <li><Link to={'/'}>Inventory</Link></li>
             <li><Link to={'/cart'}>Order</Link></li>
+            <li><Link to={'/adminRoute'}>AdminConsole</Link></li>
         </>;
 
         const navBarDisplay = () => {
