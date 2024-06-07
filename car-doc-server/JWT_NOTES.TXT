@@ -1,0 +1,34 @@
+1. Install jsonwebtoken
+2. jwt.sign(payload, secret, {expriresIn: }) // backend sendJWT function
+3. client side login page POST JWT after successful login 
+4. create secret token via server terminal: 
+node - enter
+require('crypto').randomBytes(64).toString('hex') - enter
+thus generate a large key
+5. store the key in the .env file and use it on the function through process.env.key
+
+that was all about generating , sending JWT
+
+Now, we need to store the key to the client browser http only cookie
+there are 3 ways to store key, memory, local storage and cookie, cookie is the best way
+
+to do so : 
+
+1. install cookie parser
+2. Now, set up cookie program in the sendJWT function (look there for syntax and comments)
+we need to set http only (why ? ask chatGPT)
+3. CORS 
+the cors setting is very simple, just like suggested by cGPT earlier, even simpler than that.
+we just need to put some settings inside the () of cors - 
+origin: ['http://localhost:5173', 'http://www.ourWebsiteHostLink.com'],
+credentials: true,
+methods: ['OPTIONS', 'POST', 'GET', 'PATCH', 'PUT', 'DELETE'], // Ensure all necessary methods are allowed
+allowedHeaders: ['Content-Type'],
+
+among these 4, p.Hero suggested only first two.
+
+4. Client side axios setting
+
+
+
+

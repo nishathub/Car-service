@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { carDoctorContext } from "../AuthProvider/carDoctorContext";
 import CartItem from "../Components/CartItem/CartItem";
+// import axios from 'axios';
 
 const Cart = () => {
     const { user, isAdmin, isLoading } = useContext(carDoctorContext);
@@ -13,7 +14,9 @@ const Cart = () => {
     const URL = isAdmin ? `http://localhost:5000/allOrders` : `http://localhost:5000/allOrders?email=${user?.email}`;
     useEffect(() => {
         if (!isLoading) { // this conditioning is very crucial to avoid unnecessary fetching empty data 
-            fetch(URL)
+            fetch(URL,{
+                credentials: 'include',
+            })
                 .then(res => res.json())
                 .then(data => {
                     setOrders(data);

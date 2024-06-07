@@ -10,7 +10,9 @@ const ServicesComponent = () => {
 
     useEffect(() => {
         try {
-            fetch('http://localhost:5000/allServices')
+            fetch('http://localhost:5000/allServices', {
+                credentials: 'include',
+            })
                 .then(res => res.json())
                 .then(data => {
                     setServices(data);
@@ -37,7 +39,6 @@ const ServicesComponent = () => {
         }
 
     }
-
 
     return (
         <div className="space-y-8 md:space-y-12 px-4">

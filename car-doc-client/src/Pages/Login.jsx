@@ -20,25 +20,28 @@ const Login = () => {
         loginUser(logEmail, logPassword)
             .then(result => {
                 console.log(result.user);
-                const loggedUser = {logEmail};
+                const loggedUser = { logEmail };
                 // ACCESS TOKEN JWT
                 fetch('http://localhost:5000/jwt', {
                     method: 'POST',
                     headers: {
-                        'content-type' : 'application/json'
+                        'content-type': 'application/json'
                     },
-                    body: JSON.stringify(loggedUser)
+                    body: JSON.stringify(loggedUser),
+                    credentials: 'include' // to store jwt token in the cookie.
                 })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data);
-                })
-                .catch(error => console.error(error));
-
-                // REDIRECT TO OTHER PAGE
-                setTimeout(() => {
-                    navigate(attemptURL ? attemptURL : '/');
-                }, 1000);
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        if (data.success) {
+                            console.log('jwt token stored');
+                            // REDIRECT TO OTHER PAGE
+                            setTimeout(() => {
+                                navigate(attemptURL ? attemptURL : '/');
+                            }, 1000);
+                        }
+                    })
+                    .catch(error => console.error(error));
             })
             .catch(error => console.error(error))
     }

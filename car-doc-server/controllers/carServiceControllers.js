@@ -3,6 +3,7 @@ const { ObjectId } = require("mongodb");
 const { getDB } = require("../config/db");
 const jwt = require('jsonwebtoken');
 
+
 const userCollection = () => getDB().collection('users');
 const serviceCollection = () => getDB().collection('services');
 const orderCollection = () => getDB().collection('orders');
@@ -20,6 +21,7 @@ const getAllUsers = async (req, res) => {
 const getAllServices = async (req, res) => {
     try {
         const allServices = await serviceCollection().find().toArray();
+        console.log('cookies :' , req.cookies);
         res.send(allServices);
     } catch (error) {
         res.status(500).send(error)
@@ -31,6 +33,7 @@ const getAllServices = async (req, res) => {
 const getAllOrders = async (req, res) => {
     try {
         console.log('query email: ',req.query.email);
+        console.log('jwt token :', req.cookies.JWTaccessToken);
         let query = {};
         if(req.query?.email){
             query = {email: req.query.email}
@@ -130,8 +133,20 @@ const deleteOrder = async(req, res) => {
 const sendJWT = async(req, res) => {
     const user = req.body;
     const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
-    console.log('user : ', user, 'token : ', {token}, 'secret : ', process.env.ACCESS_TOKEN_SECRET);
-    res.send({token})
+    console.log('user : ', user );
+    
+    res.cookie('JWTaccessToken', token, {
+        httpOnly: true,
+        secure : false, // because our web is http , not https(secured) // set true when hosted to https site
+        sameSite: 'none', // because our client and server site are different
+        maxAge: 3600000, // 1 hour in milliseconds
+    });
+
+    // res.send({token}) 
+    // when we send token via cookie, we don't need to send it back in the response, but we can do so for debug issue
+
+    res.send({success : true}); // this message can be found in the client site (res.. data => data.success === true) if we console the data, we will find it as true. 
+    // earlier we could console the token, now we can only know whether the jwt process was okay or not.
 }
 
 
