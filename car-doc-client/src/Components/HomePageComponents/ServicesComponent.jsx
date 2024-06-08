@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ServiceCard from "./ServiceCard";
+import axios from "axios";
 
 const ServicesComponent = () => {
     const [services, setServices] = useState([]);
@@ -10,13 +11,17 @@ const ServicesComponent = () => {
 
     useEffect(() => {
         try {
-            fetch('http://localhost:5000/allServices', {
-                credentials: 'include',
-            })
-                .then(res => res.json())
-                .then(data => {
-                    setServices(data);
-                    setDisplayServices(data.slice(0, 3));
+            // fetch('http://localhost:5000/allServices', {
+            //     credentials: 'include',
+            // })
+            //     .then(res => res.json())
+
+            // AXIOS 
+
+            axios.get('http://localhost:5000/allServices')
+                .then(res => {
+                    setServices(res.data);
+                    setDisplayServices(res.data.slice(0, 3));
                     setLoading(false);
                 })
         } catch (error) {

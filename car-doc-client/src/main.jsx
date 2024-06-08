@@ -4,6 +4,9 @@ import { RouterProvider } from "react-router-dom";
 import Routes from './Routes/Routes';
 import './index.css'
 import AuthProvider from './AuthProvider/AuthProvider';
+import axios from 'axios';
+
+axios.defaults.withCredentials = true;
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

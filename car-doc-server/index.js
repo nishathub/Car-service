@@ -16,6 +16,7 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
+
 // middleware to log cookies (NO MORE NEEDED)
 // app.use((req, res, next) => {
 //     console.log('logging from middleware index.js')

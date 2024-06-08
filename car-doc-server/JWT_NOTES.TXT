@@ -14,21 +14,103 @@ there are 3 ways to store key, memory, local storage and cookie, cookie is the b
 
 to do so : 
 
-1. install cookie parser
-2. Now, set up cookie program in the sendJWT function (look there for syntax and comments)
+
+1. set up cookie program in the sendJWT function (look there for syntax and comments)
+ look meticulously at jwt, token and cookies
+
 we need to set http only (why ? ask chatGPT)
-3. CORS 
+
+2. CORS 
 the cors setting is very simple, just like suggested by cGPT earlier, even simpler than that.
 we just need to put some settings inside the () of cors - 
+
 origin: ['http://localhost:5173', 'http://www.ourWebsiteHostLink.com'],
-credentials: true,
+credentials: true, // THIS ONE THE MOST IMPORTANT
 methods: ['OPTIONS', 'POST', 'GET', 'PATCH', 'PUT', 'DELETE'], // Ensure all necessary methods are allowed
 allowedHeaders: ['Content-Type'],
 
 among these 4, p.Hero suggested only first two.
 
-4. Client side axios setting
+3. Client side setting
+
+fetch('link', {
+    credentials: 'include'
+})
+that's it, just put credentials inside the fetch to get or send the token in or from the cookies.
 
 
+Now, check the browser cookie to find the jwt token.
+
+
+======================================================================
+
+now, we need to send the token back to server each time client fetch data from server to verify the right user.
+
+to do so, we simply need to set credentials : 'include' to each client fetch (get, post, put, delete, patch).
+
+the syntax is same : fetch('link', {
+    credentials: 'include',
+})
+
+that is the sending part. 
+We are yet to receive and view the token in the server.
+
+1. need to install cookie-parser
+2. require it and call it as a middleware
+3. console.log(req.cookies.tokenName) from the server function related to the client fetch.
+ for instance, if we fetch('orderLink', {
+    method: 'POST',
+    ...
+    ...
+    credentials: 'include',
+ })
+
+ then we need to log in to the server ORDER POST FUNCTION 
+
+ the token should log in the server console.
+
+ furthermore, we can put a cookie reader middleware in the index.js file placed after all middlewares : 
+
+ / middleware to log cookies (NO MORE NEEDED)
+// app.use((req, res, next) => {
+//     console.log('logging from middleware index.js')
+//     console.log('Cookies:', req.cookies);
+//     next();
+// });
+
+
+=================================================================================================
+
+
+To avoid setting credentials: 'include' on every fetch, we can do two things: 
+
+1. Create a customFetch function: 
+
+// Define a custom fetch function
+const customFetch = (url, options = {}) => {
+    options.credentials = 'include';
+    return fetch(url, options);
+};
+
+// Use customFetch instead of fetch
+customFetch('http://localhost:5000/allServices')
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+
+
+2. Using Axios : 
+
+in the main.jsx file
+
+import axios from 'axios';
+
+axios.defaults.withCredentials = true;
+
+that's it.
 
 

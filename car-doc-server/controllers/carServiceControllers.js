@@ -8,6 +8,7 @@ const userCollection = () => getDB().collection('users');
 const serviceCollection = () => getDB().collection('services');
 const orderCollection = () => getDB().collection('orders');
 
+
 // get All Users
 const getAllUsers = async (req, res) => {
     try {
@@ -21,7 +22,7 @@ const getAllUsers = async (req, res) => {
 const getAllServices = async (req, res) => {
     try {
         const allServices = await serviceCollection().find().toArray();
-        console.log('cookies :' , req.cookies);
+        // console.log('cookies :' , req.cookies);
         res.send(allServices);
     } catch (error) {
         res.status(500).send(error)
@@ -32,11 +33,12 @@ const getAllServices = async (req, res) => {
 // WE USED QUERY HERE TO GET SPECIFIC USER DATA
 const getAllOrders = async (req, res) => {
     try {
-        console.log('query email: ',req.query.email);
-        console.log('jwt token :', req.cookies.JWTaccessToken);
+        // console.log('query email: ',req.query.email);
+        // console.log('jwt token :', req.cookies.JWToken);
+        console.log('value from allOrders function verifiedUser : ', req.verifiedUser);
         let query = {};
-        if(req.query?.email){
-            query = {email: req.query.email}
+        if (req.query?.email) {
+            query = { email: req.query.email }
         }
         const allOrders = await orderCollection().find(query).toArray();
         res.send(allOrders);
@@ -49,10 +51,10 @@ const getAllOrders = async (req, res) => {
 const getOneService = async (req, res) => {
     try {
         const serviceID = req.params.serviceID;
-        const query = {_id : new ObjectId(serviceID)};
+        const query = { _id: new ObjectId(serviceID) };
         //options-projection to get limited data (its boolean, 1 means we want that data)
         const options = {
-            projection: {title: 1, service_id: 1, price: 1, img: 1} // here we will only get the mentioned data
+            projection: { title: 1, service_id: 1, price: 1, img: 1 } // here we will only get the mentioned data
         }
         const clickedService = await serviceCollection().findOne(query, options);
         res.send(clickedService);
@@ -79,13 +81,13 @@ const updateOrderStatus = async (req, res) => {
     try {
         const orderID = req.params.orderID;
         console.log(orderID);
-        const filter = {_id : new ObjectId(orderID)};
+        const filter = { _id: new ObjectId(orderID) };
         const newStatus = req.body;
         console.log(newStatus.status);
         const updateDoc = {
             $set: {
-              status: newStatus.status
-          }
+                status: newStatus.status
+            }
         };
         const result = await orderCollection().updateOne(filter, updateDoc);
         res.send(result);
@@ -117,10 +119,10 @@ const createOrder = async (req, res) => {
 }
 
 // DELETE Orders 
-const deleteOrder = async(req, res) => {
+const deleteOrder = async (req, res) => {
     try {
         const orderID = req.params.orderID;
-        const query = {_id : new ObjectId(orderID)};
+        const query = { _id: new ObjectId(orderID) };
         const result = await orderCollection().deleteOne(query);
         res.send(result);
 
@@ -130,30 +132,30 @@ const deleteOrder = async(req, res) => {
 }
 
 // AUTH RELATED API 
-const sendJWT = async(req, res) => {
+const sendJWT = async (req, res) => {
     const user = req.body;
     const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
-    console.log('user : ', user );
-    
-    res.cookie('JWTaccessToken', token, {
+    console.log('user : ', user);
+
+    res.cookie('JWToken', token, {
         httpOnly: true,
-        secure : false, // because our web is http , not https(secured) // set true when hosted to https site
-        sameSite: 'none', // because our client and server site are different
-        maxAge: 3600000, // 1 hour in milliseconds
+        secure: false, // because our web is http , not https(secured) // set true when hosted to https site
+        // sameSite: 'none', // because our client and server site are different
+        // maxAge: 3600000, // 1 hour in milliseconds
     });
 
     // res.send({token}) 
     // when we send token via cookie, we don't need to send it back in the response, but we can do so for debug issue
 
-    res.send({success : true}); // this message can be found in the client site (res.. data => data.success === true) if we console the data, we will find it as true. 
+    res.send({ success: true }); // this message can be found in the client site (res.. data => data.success === true) if we console the data, we will find it as true. 
     // earlier we could console the token, now we can only know whether the jwt process was okay or not.
 }
 
 
 module.exports = {
     getAllUsers, getAllOrders,
-     createUser, getAllServices, 
-     getOneService, createOrder, 
-     updateOrderStatus, deleteOrder,
-     sendJWT,
-    };
+    createUser, getAllServices,
+    getOneService, createOrder,
+    updateOrderStatus, deleteOrder,
+    sendJWT,
+};
