@@ -5,11 +5,11 @@ const jwt = require('jsonwebtoken');
 
 // CUSTOM MIDDLEWARE TO VERIFY JWT access TOKEN
 
-const logger = async (req, res, next) => {
-    const fullUrl = req.protocol + '__' + '://' + '__' + req.get('host') + '__' + req.originalUrl;
-    console.log('full URL : ', fullUrl);
-    next();
-}
+// const logger = async (req, res, next) => {
+//     const fullUrl = req.protocol + '__' + '://' + '__' + req.get('host') + '__' + req.originalUrl;
+//     console.log('full URL : ', fullUrl);
+//     next();
+// }
 
 const verifyToken = async (req, res, next) => {
     const token = req.cookies?.JWToken;
@@ -31,6 +31,24 @@ const verifyToken = async (req, res, next) => {
     });
 
 }
+
+// const verifyToken = async (req, res, next) => {
+//     const token = req.cookies?.JWToken;
+//     if (!token) {
+//         console.log('No token found');
+//         return res.status(401).send({ message: 'No token found, unauthorized access' })
+//     };
+//     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+//         if (err) {
+//             console.log(err);
+//             return res.status(401).send(err)
+//         }
+
+//         req.verifiedUser = decoded;
+//         next();
+//     })
+
+// }
 
 const router = express.Router();
 

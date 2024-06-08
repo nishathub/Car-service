@@ -35,13 +35,28 @@ const getAllOrders = async (req, res) => {
     try {
         // console.log('query email: ',req.query.email);
         // console.log('jwt token :', req.cookies.JWToken);
-        console.log('value from allOrders function verifiedUser : ', req.verifiedUser);
+        // console.log('value from allOrders function verifiedUser(logEmail) : ', req.verifiedUser.logEmail);
+        // console.log('value from allOrders function req.query.email : ', req.query?.email);
+
         let query = {};
         if (req.query?.email) {
             query = { email: req.query.email }
         }
-        const allOrders = await orderCollection().find(query).toArray();
-        res.send(allOrders);
+        const oneUserOrders = await orderCollection().find(query).toArray();
+        const allAdminOrders = await orderCollection().find().toArray();
+        if(req.verifiedUser.logEmail === 'nishat@mail.com'){
+            console.log('log from allOrders: user is admin, proceeded access to all Orders');
+           return res.send(allAdminOrders);
+        }
+        if(req.verifiedUser.logEmail === req.query?.email){
+            console.log('log from allOrders: user is not admin, but valid user, proceeded access to one user Orders');
+           return res.send(oneUserOrders);
+        }
+        if(!req.query?.email || req.verifiedUser.logEmail !== req.query?.email){
+            console.log('Access denied');
+            console.log('log from allOrders: unknown attempt, access denied');
+            return res.status(403).send({message : 'Access denied'})
+        }
     } catch (error) {
         res.status(500).send(error)
     }

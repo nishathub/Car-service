@@ -11,10 +11,11 @@ const Cart = () => {
 
     //WE USED QUERY (req.query) in the backend to get specific user data.
     // For admin, fetch all order, for others, only theirs ;
-    const URL = isAdmin ? `http://localhost:5000/allOrders` : `http://localhost:5000/allOrders?email=${user?.email}`;
+    // const URL = isAdmin ? `http://localhost:5000/allOrders` : `http://localhost:5000/allOrders?email=${user?.email}`;
+    const URL = `http://localhost:5000/allOrders?email=${user?.email}`;
     useEffect(() => {
         if (!isLoading) { // this conditioning is very crucial to avoid unnecessary fetching empty data 
-            fetch(URL,{
+            fetch(URL, {
                 credentials: 'include',
             })
                 .then(res => res.json())
@@ -83,54 +84,65 @@ const Cart = () => {
                     <p>Loading</p>
                     :
                     <div>
+
                         {
-                            orders.length === 0 ?
-                                <div className="text-center h-screen">
-                                    <p className="text-error text-3xl">Cart is empty!</p>
-                                    <p className="mt-4 text-xl">Add some services to keep your vehicle smooth</p>
-                                </div>
+                            !user ?
+
+                                <p className="text-3xl text-center">Log in to see items in the cart</p>
                                 :
                                 <div>
-                                    <div>
-                                        {isAdmin &&
-                                            <div>
-                                                <p className="text-yellow-400 font-bold text-right my-4">You are Admin</p>
-                                            </div>}
-                                    </div>
-                                    {/* table header  */}
-                                    <div className="overflow-x-auto mb-4 bg-base-300">
-                                        <table className="table">
-                                            <thead>
-                                                <tr className="flex justify-between text-gray-300 tracking-wider">
-                                                    <th hidden={isAdmin}>Delete</th>
-                                                    <th hidden={isAdmin ? false : true}>Email</th>
-                                                    <th className="hidden md:inline-flex">Image</th>
-                                                    <th>Service</th>
-                                                    <th className="hidden md:inline-flex">Date</th>
-                                                    <th className="hidden md:inline-flex">Price</th>
-                                                    <th className=" md:hidden">Date & Price</th>
-                                                    <th>Status</th>
-                                                </tr>
-                                            </thead>
-                                        </table>
-
-                                    </div>
-                                    {/* dynamic cart items  */}
                                     {
-                                        orders.map(order =>
+                                        orders.length === 0 ?
+                                            <div className="text-center h-screen">
+                                                <p className="text-error text-3xl">Cart is empty!</p>
+                                                <p className="mt-4 text-xl">Add some services to keep your vehicle smooth</p>
+                                            </div>
+                                            :
+                                            <div>
+                                                <div>
+                                                    {isAdmin &&
+                                                        <div>
+                                                            <p className="text-yellow-400 font-bold text-right my-4">You are Admin</p>
+                                                        </div>}
+                                                </div>
+                                                {/* table header  */}
+                                                <div className="overflow-x-auto mb-4 bg-base-300">
+                                                    <table className="table">
+                                                        <thead>
+                                                            <tr className="flex justify-between text-gray-300 tracking-wider">
+                                                                <th hidden={isAdmin}>Delete</th>
+                                                                <th hidden={isAdmin ? false : true}>Email</th>
+                                                                <th className="hidden md:inline-flex">Image</th>
+                                                                <th>Service</th>
+                                                                <th className="hidden md:inline-flex">Date</th>
+                                                                <th className="hidden md:inline-flex">Price</th>
+                                                                <th className=" md:hidden">Date & Price</th>
+                                                                <th>Status</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
 
-                                            <CartItem
-                                                key={order._id}
-                                                order={order}
-                                                handleRemoveOrders={handleRemoveOrders}
-                                                handleOrderConfirm={handleOrderConfirm}
-                                                isAdmin={isAdmin}
-                                            ></CartItem>
-                                        )
+                                                </div>
+                                                {/* dynamic cart items  */}
+                                                {
+                                                    orders.map(order =>
+
+                                                        <CartItem
+                                                            key={order._id}
+                                                            order={order}
+                                                            handleRemoveOrders={handleRemoveOrders}
+                                                            handleOrderConfirm={handleOrderConfirm}
+                                                            isAdmin={isAdmin}
+                                                        ></CartItem>
+                                                    )
+                                                }
+                                            </div>
                                     }
                                 </div>
                         }
-                    </div>}
+
+                    </div>
+                }
             </div>
 
 
