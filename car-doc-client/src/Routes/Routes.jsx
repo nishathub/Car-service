@@ -34,18 +34,27 @@ const Routes = createBrowserRouter([
       },
       {
         path: "/adminRoute",
-        element: <PrivateRoutes>
-          <AdminRoutes>
-            <AdminConsole></AdminConsole>
-          </AdminRoutes>
-        </PrivateRoutes>,
+        element: (
+          <PrivateRoutes>
+            <AdminRoutes>
+              <AdminConsole></AdminConsole>
+            </AdminRoutes>
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/checkout/:serviceID",
-        element: <PrivateRoutes><Checkout></Checkout></PrivateRoutes>,
-        loader: ({ params }) => fetch(`http://localhost:5000/allServices/${params.serviceID}`)
+        element: (
+          <PrivateRoutes>
+            <Checkout></Checkout>
+          </PrivateRoutes>
+        ),
+        loader: ({ params }) =>
+          fetch(
+            `https://car-doc-server-5h2za3pf1-nishats-projects-890e0902.vercel.app/allServices/${params.serviceID}`
+          ),
       },
-    ]
+    ],
   },
 ]);
 

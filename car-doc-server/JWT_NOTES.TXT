@@ -93,7 +93,7 @@ const customFetch = (url, options = {}) => {
 };
 
 // Use customFetch instead of fetch
-customFetch('http://localhost:5000/allServices')
+customFetch('https://car-doc-server-5h2za3pf1-nishats-projects-890e0902.vercel.app/allServices')
     .then(res => res.json())
     .then(data => {
         console.log(data);

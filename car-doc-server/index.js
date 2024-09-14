@@ -10,7 +10,7 @@ const port = process.env.PORT || 5000;
 
 // middlewares
 app.use(cors({
-    origin: 'http://localhost:5173', // Your frontend origin
+    origin: ['http://localhost:5173', 'http://localhost:5174', 'https://carservice-53cf6.web.app/'], // Your frontend origin
     credentials: true // Allow credentials
 }));
 app.use(express.json());
@@ -23,6 +23,20 @@ app.use(cookieParser());
 //     console.log('Cookies:', req.cookies);
 //     next();
 // });
+
+// ACCESS CONTROL ALLOW ORIGIN [CORS ISSUE IN LIVE SITE]
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'https://carservice-53cf6.web.app');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
+});
+
+// PREFLIGHT REQ
+app.options('*', cors()); // Handle preflight requests for all routes
+
+
 
 // Master Function
 async function startServer () {

@@ -2,12 +2,12 @@ import Marquee from "react-fast-marquee";
 
 
 const FeaturesSection = () => {
-    const expertIcon = '../../../public/icons/group.svg';
-    const timeIcon = '../../../public/icons/Group 38729.svg';
-    const personIcon = '../../../public/icons/person.svg';
-    const toolIcon = '../../../public/icons/Wrench.svg';
-    const guardIcon = '../../../public/icons/check.svg';
-    const deliveryIcon = '../../../public/icons/deliveryt.svg';
+    const expertIcon = 'icons/group.svg';
+    const timeIcon = 'icons/Group 38729.svg';
+    const personIcon = 'icons/person.svg';
+    const toolIcon = 'icons/Wrench.svg';
+    const guardIcon = 'icons/check.svg';
+    const deliveryIcon = 'icons/deliveryt.svg';
 
     return (
         <div className="">

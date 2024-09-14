@@ -34,9 +34,9 @@ const getAllServices = async (req, res) => {
 const getAllOrders = async (req, res) => {
     try {
         // console.log('query email: ',req.query.email);
-        // console.log('jwt token :', req.cookies.JWToken);
-        // console.log('value from allOrders function verifiedUser(logEmail) : ', req.verifiedUser.logEmail);
-        // console.log('value from allOrders function req.query.email : ', req.query?.email);
+        console.log('jwt token :', req.cookies.JWToken);
+        console.log('value from allOrders function verifiedUser(logEmail) : ', req.verifiedUser.logEmail);
+        console.log('value from allOrders function req.query.email : ', req.query?.email);
 
         let query = {};
         if (req.query?.email) {
@@ -149,14 +149,14 @@ const deleteOrder = async (req, res) => {
 // AUTH RELATED API 
 const sendJWT = async (req, res) => {
     const user = req.body;
-    const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1hr' });
     console.log('user : ', user);
-
+    
     res.cookie('JWToken', token, {
         httpOnly: true,
-        secure: false, // because our web is http , not https(secured) // set true when hosted to https site
-        // sameSite: 'none', // because our client and server site are different
-        // maxAge: 3600000, // 1 hour in milliseconds
+        secure: true, // because our web is http , not https(secured) // set true when hosted to https site
+        sameSite: 'none', // because our client and server site are different
+        maxAge: 3600000, // 1 hour in milliseconds
     });
 
     // res.send({token}) 
